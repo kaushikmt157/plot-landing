@@ -1,9 +1,10 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
-
 export default function PageContent() {
-  const params = useSearchParams()
+  const params = new URLSearchParams(
+    typeof window !== 'undefined' ? window.location.search : ''
+  )
+
   const name = params.get('name') ?? 'Test'
 
   return <div>{name}</div>
