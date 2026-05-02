@@ -1,11 +1,12 @@
 'use client'
+
 import { useSearchParams } from 'next/navigation'
 
-export default function Home() {
+export default function PageContent() {
   const params = useSearchParams()
 
-  const name = params.get('name') || 'Flovia Properties'
-  const location = params.get('location') || 'Karnal'
+  const name = params.get('name') ?? 'Flovia Properties'
+  const location = params.get('location') ?? 'Karnal'
   const phone = '919999999999'
 
   const whatsappLink = `https://wa.me/${phone}?text=Hi, I am interested in plots in ${location}`
@@ -19,6 +20,7 @@ export default function Home() {
           <img
             src="https://images.unsplash.com/photo-1560518883-ce09059eeffa"
             className="w-full h-full object-cover"
+            alt="Property"
           />
           <div className="absolute inset-0 bg-black/60"></div>
         </div>
@@ -32,16 +34,10 @@ export default function Home() {
           </p>
 
           <div className="flex gap-4 justify-center flex-wrap">
-            <a
-              href={whatsappLink}
-              className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-semibold"
-            >
+            <a href={whatsappLink} className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-semibold">
               WhatsApp Now
             </a>
-            <a
-              href={`tel:+${phone}`}
-              className="bg-white text-black px-6 py-3 rounded-xl font-semibold"
-            >
+            <a href={`tel:+${phone}`} className="bg-white text-black px-6 py-3 rounded-xl font-semibold">
               Call Now
             </a>
           </div>
@@ -55,11 +51,8 @@ export default function Home() {
         </h2>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {['100 sq yd', '150 sq yd', '200 sq yd'].map((size, i) => (
-            <div
-              key={i}
-              className="bg-white rounded-2xl shadow-sm p-6 text-center"
-            >
+          {['100 sq yd', '150 sq yd', '200 sq yd'].map((size) => (
+            <div key={size} className="bg-white rounded-2xl shadow-sm p-6 text-center">
               <h3 className="text-xl font-semibold mb-2">{size}</h3>
               <p className="text-gray-500 mb-3">Prime location plots</p>
               <p className="font-semibold text-blue-600">Price on call</p>
@@ -84,7 +77,7 @@ export default function Home() {
             <div key={i} className="overflow-hidden rounded-xl">
               <img
                 src={src}
-                alt={`Property ${i + 1}`}
+                alt={`Property ${i}`}
                 className="w-full h-full aspect-[4/3] object-cover hover:scale-105 transition duration-300"
               />
             </div>
@@ -99,24 +92,15 @@ export default function Home() {
         </h2>
 
         <form
-          onSubmit={(e) => {
+          onSubmit={(e: React.FormEvent) => {
             e.preventDefault()
             alert('Demo form submitted')
           }}
           className="max-w-xl mx-auto bg-white p-8 rounded-2xl shadow-sm space-y-4"
         >
-          <input
-            placeholder="Your Name"
-            className="w-full border border-gray-300 p-3 rounded-lg"
-          />
-          <input
-            placeholder="Phone Number"
-            className="w-full border border-gray-300 p-3 rounded-lg"
-          />
-          <textarea
-            placeholder="Message"
-            className="w-full border border-gray-300 p-3 rounded-lg"
-          ></textarea>
+          <input className="w-full border p-3 rounded-lg" placeholder="Your Name" />
+          <input className="w-full border p-3 rounded-lg" placeholder="Phone Number" />
+          <textarea className="w-full border p-3 rounded-lg" placeholder="Message" />
 
           <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold">
             Submit
@@ -124,34 +108,12 @@ export default function Home() {
         </form>
       </section>
 
-      {/* TRUST */}
-      <section className="py-16 px-6 md:px-20 bg-white text-center">
-        <h2 className="text-3xl font-bold mb-10">
-          Why Choose {name}
-        </h2>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          <div>
-            <h3 className="text-xl font-semibold">100+ Clients</h3>
-            <p className="text-gray-500">Satisfied buyers</p>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold">Verified Listings</h3>
-            <p className="text-gray-500">Trusted properties</p>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold">Site Visits</h3>
-            <p className="text-gray-500">Available anytime</p>
-          </div>
-        </div>
-      </section>
-
       {/* FOOTER */}
       <footer className="bg-[#0F172A] text-white text-center py-6">
         <p>© {name} - All Rights Reserved</p>
       </footer>
 
-      {/* FLOATING WHATSAPP */}
+      {/* WHATSAPP FLOAT */}
       <a
         href={whatsappLink}
         className="fixed bottom-5 right-5 bg-green-500 hover:bg-green-600 text-white px-5 py-3 rounded-full shadow-lg"
